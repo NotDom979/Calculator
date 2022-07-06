@@ -14,7 +14,7 @@ Window::Window() : wxFrame(nullptr, wxID_ANY, "Prototype", wxPoint(200,200), wxS
 	Num2 = new wxButton(this, wxID_ANY, "2", wxPoint(84, 100), wxSize(84, 75));
 	Num3 = new wxButton(this, wxID_ANY, "3", wxPoint(168, 100), wxSize(87, 75));
 	Num4 = new wxButton(this, wxID_ANY, "4", wxPoint(0, 175), wxSize(84, 75));
-	Num5 = new wxButton(this, wxID_ANY, "5", wxPoint(84, 175), wxSize(84, 75));
+	Num5 = new wxButton(this, wxID_ANY, "5", wxPoint(84, 175), wxSize(84, 75)); 
 	Num6 = new wxButton(this, wxID_ANY, "4", wxPoint(168, 175), wxSize(87, 75));
 	Num7 = new wxButton(this, wxID_ANY, "7", wxPoint(0, 250), wxSize(84, 75));
 	Num8 = new wxButton(this, wxID_ANY, "8", wxPoint(84, 250), wxSize(84, 75));
