@@ -124,4 +124,5 @@ void Window::OnButton(wxCommandEvent& event)
 	default:
 		break;
 	}
+	event.Skip();
 }
