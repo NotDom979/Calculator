@@ -25,6 +25,8 @@ private:
 	wxButton* Num9 = nullptr;
 	wxButton* Num0 = nullptr;
 	wxTextCtrl* Numberbox = nullptr;
+	wxDECLARE_EVENT_TABLE();
+	void OnButton(wxCommandEvent& event);
 
 public:
 	Window();
