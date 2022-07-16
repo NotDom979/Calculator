@@ -25,6 +25,7 @@ EVT_BUTTON(9093, Window::OnButton)
 END_EVENT_TABLE()
 Window::Window() : wxFrame(nullptr, wxID_ANY, "Prototype", wxPoint(200, 200), wxSize(350, 425), wxDEFAULT_FRAME_STYLE & ~(wxRESIZE_BORDER | wxMAXIMIZE))
 {
+	
 	Window::SetMaxSize(wxSize(350, 425));
 	ButtonFactory Factory;
 	for (int i = 0; i < 4; i++)
@@ -47,9 +48,11 @@ void Window::OnButton(wxCommandEvent& event)
 	{
 	case 10000:
 		Numberbox->AppendText("+");
+		P->Add(Numberbox);
 		break;
 	case 10001:
 		Numberbox->AppendText("-");
+		P->Sub(Numberbox);
 		break;
 	case 10002:
 		Numberbox->AppendText("*");
@@ -95,6 +98,7 @@ void Window::OnButton(wxCommandEvent& event)
 		break;
 	case 10016:
 		Numberbox->AppendText("=");
+		P->Equals(Numberbox);
 		break;
 	case 10017:
 		Numberbox->AppendText("MOD");
