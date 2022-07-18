@@ -9,6 +9,7 @@ private:
 	static CalculatorProcessor* instance;
 	CalculatorProcessor() {}
 	int num1 = 0;
+	int result = 0;
 	std::vector<int> nums;
 	bool add = false;
 	bool sub = false;
@@ -20,10 +21,12 @@ private:
 	bool dEC = false;
 	enum Choice
 	{
-	 aDd, sUb, pRod, qUot, mOd, biN, heX, deC
+	 aDd, sUb, pRod, qUot, mOd, biN, heX, deC, clear
 	};
 	std::vector<Choice> choices;
 public:
+	CalculatorProcessor(CalculatorProcessor& other) = delete;
+	void operator=(CalculatorProcessor& other) = delete;
 	static CalculatorProcessor* getInstance();
 	void Add(wxTextCtrl* numbox);
 	void Sub(wxTextCtrl* numbox);
@@ -35,5 +38,6 @@ public:
 	void Dec(wxTextCtrl* numbox);
 	int GetNum(wxTextCtrl* numbox);
 	void Equals(wxTextCtrl* numbox);
+	void Clear(wxTextCtrl* numbox);
 };
 

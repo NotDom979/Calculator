@@ -56,6 +56,7 @@ void Window::OnButton(wxCommandEvent& event)
 		break;
 	case 10002:
 		Numberbox->AppendText("*");
+		P->Multiply(Numberbox);
 		break;
 	case 10003:
 		Numberbox->AppendText("/");
@@ -101,7 +102,8 @@ void Window::OnButton(wxCommandEvent& event)
 		P->Equals(Numberbox);
 		break;
 	case 10017:
-		Numberbox->AppendText("MOD");
+		Numberbox->AppendText("%");
+		P->Mod(Numberbox);
 		break;
 	case 9091:
 		Numberbox->AppendText("BIN");
