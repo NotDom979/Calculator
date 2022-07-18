@@ -31,19 +31,14 @@ void CalculatorProcessor::Add(wxTextCtrl* numbox)
     }
     else if(numbox->GetValue().Contains("="))
     {
-       int sum = 0;
-       int num3 = GetNum(numbox);
        if (nums.size() != 0)
        {
           result = result + nums[0];
           nums.erase(nums.begin());
        }
        result = result + (num1 + num3);
-       std::string sum1 = (std::to_string(result));
-       numbox->SetValue(sum1);
        nums.shrink_to_fit();
        num1 = 0;
-       nums.clear();
        num3 = 0;
  
        
@@ -67,16 +62,12 @@ void CalculatorProcessor::Sub(wxTextCtrl* numbox)
     }
     else if (numbox->GetValue().Contains("="))
     {
-        int sum = 0;
-        int num3 = GetNum(numbox);
         if (nums.size() != 0)
         {
             result = result - nums[0];
             nums.erase(nums.begin());
         }
-        result = result - (num1 - num3);
-        std::string sum1 = (std::to_string(result));
-        numbox->SetValue(sum1);
+        result = result - num1 - num3;
         nums.shrink_to_fit();
         num1 = 0;
         num3 = 0;
@@ -101,20 +92,20 @@ void CalculatorProcessor::Multiply(wxTextCtrl* numbox)
     }
     else if (numbox->GetValue().Contains("="))
     {
-        int sum = 0;
-        int num3 = GetNum(numbox);
         if (nums.size() != 0)
         {
             result *= nums[0];
             nums.erase(nums.begin());
         }
-        result = result * (num1 * num3);
-        std::string sum1 = (std::to_string(result));
-        numbox->SetValue(sum1);
+        if (num1 != 0 && num3 != 0)
+        {
+            result = result * num1 * num3;
+        }
+        else if (num1 == 0 && num3 != 0)
+        {
+            result *= num3;
+        }
         nums.shrink_to_fit();
-        num1 = 0;
-        num3 = 0;
-
     }
 }
 void CalculatorProcessor::Divide(wxTextCtrl* numbox)
@@ -135,20 +126,25 @@ void CalculatorProcessor::Divide(wxTextCtrl* numbox)
     }
     else if (numbox->GetValue().Contains("="))
     {
-        int sum = 0;
-        int num3 = GetNum(numbox);
+        
         if (nums.size() != 0)
         {
             result /= nums[0];
             nums.erase(nums.begin());
         }
-        result = result / (num1 / num3);
-        std::string sum1 = (std::to_string(result));
-        numbox->SetValue(sum1);
+        if (num1 != 0)
+        {
+           result = result / num1 / num3;
+        }
+        if (num1 != 0 && num3 != 0)
+        {
+            result = result / num1 / num3;
+        }
+        else if (num1 == 0 && num3 != 0)
+        {
+            result /= num3;
+        }
         nums.shrink_to_fit();
-        num1 = 0;
-        num3 = 0;
-
     }
 }
 void CalculatorProcessor::Mod(wxTextCtrl* numbox)
@@ -169,20 +165,21 @@ void CalculatorProcessor::Mod(wxTextCtrl* numbox)
     }
     else if (numbox->GetValue().Contains("="))
     {
-        int sum = 0;
         int num3 = GetNum(numbox);
         if (nums.size() != 0)
         {
             result %= nums[0];
             nums.erase(nums.begin());
         }
-        result = result % (num1 % num3);
-        std::string sum1 = (std::to_string(result));
-        numbox->SetValue(sum1);
+        if (num1 != 0 && num3 != 0)
+        {
+            result = result % num1 % num3;
+        }
+        else if (num1 == 0 && num3 != 0)
+        {
+            result %= num3;
+        }  
         nums.shrink_to_fit();
-        num1 = 0;
-        num3 = 0;
-
     }
 }
 void CalculatorProcessor::BIN(wxTextCtrl* numbox)
@@ -251,61 +248,80 @@ int CalculatorProcessor::GetNum(wxTextCtrl* numbox)
 
 void CalculatorProcessor::Equals(wxTextCtrl* numbox)
 {
+
     for (int i = 0; i < choices.size(); i++)
     {
+        auto it = std::find(choices.begin(), choices.end(),i);
         switch (choices[i])
         {
         case CalculatorProcessor::aDd:
+            if (it == choices.end())
+            {
+                num3 = GetNum(numbox);
+            }
             Add(numbox);
             add = false;
-            choices.erase(choices.begin() + i);
             break;
         case CalculatorProcessor::sUb:
+            if (it == choices.end())
+            {
+                num3 = GetNum(numbox);
+            }
             Sub(numbox);
             sub = false;
-            choices.erase(choices.begin() + i);
             break;
         case CalculatorProcessor::pRod:
+            if (it == choices.end())
+            {
+                num3 = GetNum(numbox);
+            }
             Multiply(numbox);
             prod = false;
-            choices.erase(choices.begin() + i);
             break;
         case CalculatorProcessor::qUot:
+            if (it == choices.end())
+            {
+                num3 = GetNum(numbox);
+            }
             Divide(numbox);
             quot = false;
-            choices.erase(choices.begin() + i);
             break;
         case CalculatorProcessor::mOd:
+            if (it == choices.end())
+            {
+                num3 = GetNum(numbox);
+            }
             Mod(numbox);
             mod = false;
-            choices.erase(choices.begin() + i);
             break;
         case CalculatorProcessor::biN:
             BIN(numbox);
             bIN = false;
-            choices.erase(choices.begin() + i);
             break;
         case CalculatorProcessor::heX:
             Hex(numbox);
             hEX = false;
-            choices.erase(choices.begin() + i);
             break;
         case CalculatorProcessor::deC:
             Dec(numbox);
             dEC = false;
-            choices.erase(choices.begin() + i);
             break;
         case CalculatorProcessor::clear:
             Clear(numbox);
             i = choices.size();
             choices.clear();
+            num1 = 0;
+            num3 = 0;
             break;
         default:
             break;
         }
        
     }
+    numbox->SetValue(std::to_string(result));
     result = 0;
+    num1 = 3;
+    num1 = 0;
 }
 
 void CalculatorProcessor::Clear(wxTextCtrl* numbox)

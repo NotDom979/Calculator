@@ -60,6 +60,7 @@ void Window::OnButton(wxCommandEvent& event)
 		break;
 	case 10003:
 		Numberbox->AppendText("/");
+		P->Divide(Numberbox);
 		break;
 	case 10004:
 		Numberbox->AppendText("-");

@@ -9,6 +9,7 @@ private:
 	static CalculatorProcessor* instance;
 	CalculatorProcessor() {}
 	int num1 = 0;
+	int num3 = 0;
 	int result = 0;
 	std::vector<int> nums;
 	bool add = false;
