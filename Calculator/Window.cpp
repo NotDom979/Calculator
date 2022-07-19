@@ -107,10 +107,10 @@ void Window::OnButton(wxCommandEvent& event)
 		P->Mod(Numberbox);
 		break;
 	case 9091:
-		Numberbox->AppendText("BIN");
+		P->BIN(Numberbox);
 		break;
 	case 9092:
-		Numberbox->AppendText("HEX");
+		P->Hex(Numberbox);
 		break;
 	case 9093:
 		Numberbox->AppendText("DEC");

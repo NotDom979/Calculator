@@ -62,12 +62,19 @@ void CalculatorProcessor::Sub(wxTextCtrl* numbox)
     }
     else if (numbox->GetValue().Contains("="))
     {
+        int diff = num1 - num3;
         if (nums.size() != 0)
         {
             result = result - nums[0];
             nums.erase(nums.begin());
         }
-        result = result - num1 - num3;
+        else if (num1 == 0)
+        {
+            result += diff;
+        }
+        else
+            result -= diff;
+       
         nums.shrink_to_fit();
         num1 = 0;
         num3 = 0;
@@ -198,6 +205,7 @@ void CalculatorProcessor::BIN(wxTextCtrl* numbox)
 
         num3 = num3 / 2;
     }
+    numbox->SetValue(bin);
 }
 void CalculatorProcessor::Hex(wxTextCtrl* numbox)
 {
@@ -236,6 +244,7 @@ void CalculatorProcessor::Hex(wxTextCtrl* numbox)
         }
         heX = heX / 16;
     }
+    numbox->SetValue(hex);
 }
 void CalculatorProcessor::Dec(wxTextCtrl* numbox)
 {
@@ -259,11 +268,19 @@ void CalculatorProcessor::Equals(wxTextCtrl* numbox)
             {
                 num3 = GetNum(numbox);
             }
+            else if (choices.size() == 1)
+            {
+                num3 = GetNum(numbox);
+            }
             Add(numbox);
             add = false;
             break;
         case CalculatorProcessor::sUb:
-            if (it == choices.end())
+            if (choices[i] == choices.back())
+            {
+                num3 = GetNum(numbox);
+            }
+            else if (choices.size() == 1)
             {
                 num3 = GetNum(numbox);
             }
@@ -275,6 +292,10 @@ void CalculatorProcessor::Equals(wxTextCtrl* numbox)
             {
                 num3 = GetNum(numbox);
             }
+            else if (choices.size() == 1)
+            {
+                num3 = GetNum(numbox);
+            }
             Multiply(numbox);
             prod = false;
             break;
@@ -283,11 +304,19 @@ void CalculatorProcessor::Equals(wxTextCtrl* numbox)
             {
                 num3 = GetNum(numbox);
             }
+            else if (choices.size() == 1)
+            {
+                num3 = GetNum(numbox);
+            }
             Divide(numbox);
             quot = false;
             break;
         case CalculatorProcessor::mOd:
             if (it == choices.end())
+            {
+                num3 = GetNum(numbox);
+            }
+            else if (choices.size() == 1)
             {
                 num3 = GetNum(numbox);
             }
@@ -311,6 +340,7 @@ void CalculatorProcessor::Equals(wxTextCtrl* numbox)
             i = choices.size();
             choices.clear();
             num1 = 0;
+            result = 0;
             num3 = 0;
             break;
         default:
@@ -320,7 +350,7 @@ void CalculatorProcessor::Equals(wxTextCtrl* numbox)
     }
     numbox->SetValue(std::to_string(result));
     result = 0;
-    num1 = 3;
+    num3 = 0;
     num1 = 0;
 }
 
