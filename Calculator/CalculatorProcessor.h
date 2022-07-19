@@ -20,6 +20,7 @@ private:
 	bool bIN = false;
 	bool hEX = false;
 	bool dEC = false;
+	bool neg = false;
 	enum Choice
 	{
 	 aDd, sUb, pRod, qUot, mOd, biN, heX, deC, clear
@@ -33,6 +34,7 @@ public:
 	void Sub(wxTextCtrl* numbox);
 	void Multiply(wxTextCtrl* numbox);
 	void Divide(wxTextCtrl* numbox);
+	void Negative(wxTextCtrl* numbox);
 	void Mod(wxTextCtrl* numbox);
 	void BIN(wxTextCtrl* numbox);
 	void Hex(wxTextCtrl* numbox);

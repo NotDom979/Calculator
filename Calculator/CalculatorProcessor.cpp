@@ -72,6 +72,10 @@ void CalculatorProcessor::Sub(wxTextCtrl* numbox)
         {
             result += diff;
         }
+        else if (diff < 0)
+        {
+            result += diff;
+        }
         else
             result -= diff;
        
@@ -101,16 +105,33 @@ void CalculatorProcessor::Multiply(wxTextCtrl* numbox)
     {
         if (nums.size() != 0)
         {
-            result *= nums[0];
+            if (result == 0)
+            {
+                result = nums[0];
+            }
+            else
+                result *= nums[0];
+
             nums.erase(nums.begin());
         }
         if (num1 != 0 && num3 != 0)
         {
-            result = result * num1 * num3;
+            int produ = num1 * num3;
+            if (result == 0)
+            {
+                result = produ;
+            }
+            else
+                result *= produ;
         }
         else if (num1 == 0 && num3 != 0)
         {
-            result *= num3;
+            if (result == 0)
+            {
+                result = num3;
+            }
+            else
+                result *= num3;
         }
         nums.shrink_to_fit();
     }
@@ -136,22 +157,44 @@ void CalculatorProcessor::Divide(wxTextCtrl* numbox)
         
         if (nums.size() != 0)
         {
-            result /= nums[0];
+            if (result == 0)
+            {
+                result = nums[0];
+            }
+            else
+                result /= nums[0];
+
             nums.erase(nums.begin());
-        }
-        if (num1 != 0)
-        {
-           result = result / num1 / num3;
         }
         if (num1 != 0 && num3 != 0)
         {
-            result = result / num1 / num3;
+            if (result == 0)
+            {
+                result = num1 / num3;
+            }
+            else
+                result = result / num1 / num3;
         }
         else if (num1 == 0 && num3 != 0)
         {
-            result /= num3;
+            if (result == 0)
+            {
+                result == num3;
+            }
+            else
+                result /= num3;
         }
         nums.shrink_to_fit();
+    }
+}
+void CalculatorProcessor::Negative(wxTextCtrl* numbox)
+{
+    int nega = GetNum(numbox);
+    neg = true;
+    if (neg == true)
+    {
+        nega = 0 - nega;
+        numbox->SetValue(std::to_string(nega));
     }
 }
 void CalculatorProcessor::Mod(wxTextCtrl* numbox)
@@ -175,16 +218,32 @@ void CalculatorProcessor::Mod(wxTextCtrl* numbox)
         int num3 = GetNum(numbox);
         if (nums.size() != 0)
         {
-            result %= nums[0];
+            if (result == 0)
+            {
+                result = nums[0];
+            }
+            else
+                result %= nums[0];
+
             nums.erase(nums.begin());
         }
         if (num1 != 0 && num3 != 0)
         {
-            result = result % num1 % num3;
+            if (result == 0)
+            {
+                result = num1 % num3;
+            }
+            else
+                result = result % num1 % num3;
         }
         else if (num1 == 0 && num3 != 0)
         {
-            result %= num3;
+            if (result == 0)
+            {
+                result = num3;
+            }
+            else
+                result %= num3;
         }  
         nums.shrink_to_fit();
     }
@@ -288,7 +347,7 @@ void CalculatorProcessor::Equals(wxTextCtrl* numbox)
             sub = false;
             break;
         case CalculatorProcessor::pRod:
-            if (it == choices.end())
+            if (choices[i] == choices.back())
             {
                 num3 = GetNum(numbox);
             }
@@ -300,7 +359,7 @@ void CalculatorProcessor::Equals(wxTextCtrl* numbox)
             prod = false;
             break;
         case CalculatorProcessor::qUot:
-            if (it == choices.end())
+            if (choices[i] == choices.back())
             {
                 num3 = GetNum(numbox);
             }
@@ -312,7 +371,7 @@ void CalculatorProcessor::Equals(wxTextCtrl* numbox)
             quot = false;
             break;
         case CalculatorProcessor::mOd:
-            if (it == choices.end())
+            if (choices[i] == choices.back())
             {
                 num3 = GetNum(numbox);
             }
@@ -349,6 +408,7 @@ void CalculatorProcessor::Equals(wxTextCtrl* numbox)
        
     }
     numbox->SetValue(std::to_string(result));
+    choices.clear();
     result = 0;
     num3 = 0;
     num1 = 0;
@@ -357,7 +417,10 @@ void CalculatorProcessor::Equals(wxTextCtrl* numbox)
 void CalculatorProcessor::Clear(wxTextCtrl* numbox)
 {
     choices.push_back(clear);
-    numbox->Clear();
+    num3 = 0;
+    num1 = 0;
     result = 0;
     nums.clear();
+    numbox->Clear();
+    choices.clear();
 }

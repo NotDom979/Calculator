@@ -63,7 +63,7 @@ void Window::OnButton(wxCommandEvent& event)
 		P->Divide(Numberbox);
 		break;
 	case 10004:
-		Numberbox->AppendText("-");
+		P->Negative(Numberbox);
 		break;
 	case 10005:
 		Numberbox->AppendText("1");
@@ -96,7 +96,7 @@ void Window::OnButton(wxCommandEvent& event)
 		Numberbox->AppendText("0");
 		break;
 	case 10015:
-		Numberbox->Clear();
+		P->Clear(Numberbox);
 		break;
 	case 10016:
 		Numberbox->AppendText("=");
