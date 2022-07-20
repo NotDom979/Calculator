@@ -1,14 +1,17 @@
 #pragma once
 #include "wx/wx.h"
 #include <list>
+#include <sstream>
 #include <vector>
 #include <string>
+#include <string.h>
 class CalculatorProcessor
 {
 private:
 	static CalculatorProcessor* instance;
 	CalculatorProcessor() {}
 	int num1 = 0;
+	int _dec = 0;
 	int num3 = 0;
 	int result = 0;
 	std::vector<int> nums;
@@ -41,6 +44,7 @@ public:
 	void Dec(wxTextCtrl* numbox);
 	int GetNum(wxTextCtrl* numbox);
 	void Equals(wxTextCtrl* numbox);
+
 	void Clear(wxTextCtrl* numbox);
 };
 

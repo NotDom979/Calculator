@@ -113,7 +113,7 @@ void Window::OnButton(wxCommandEvent& event)
 		P->Hex(Numberbox);
 		break;
 	case 9093:
-		Numberbox->AppendText("DEC");
+		P->Dec(Numberbox);
 		break;
 	default:
 		break;
