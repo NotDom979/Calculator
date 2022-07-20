@@ -7,6 +7,7 @@ class ButtonFactory
 public:
 	ButtonFactory();
 	void CreateButton(wxWindow *window, int x, std::string s, int a, int b, int c, int d);
+	wxButton* CreateButtonTest(wxWindow* window, int x, std::string s, int a, int b, int c, int d);
 	void OthersButton(wxWindow* window);
 };
 

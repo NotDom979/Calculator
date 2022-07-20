@@ -8,6 +8,12 @@ void ButtonFactory::CreateButton(wxWindow *window, int x, std::string s, int a, 
 	wxButton* Nums = new wxButton(window, x , s, wxPoint((-84 + a), b), wxSize(c, d));
 }
 
+wxButton* ButtonFactory::CreateButtonTest(wxWindow* window, int x, std::string s, int a, int b, int c, int d)
+{
+	wxButton* Nums = new wxButton(window, x, s, wxPoint((-84 + a), b), wxSize(c, d));
+	return Nums;
+}
+
 void ButtonFactory::OthersButton(wxWindow* window)
 {
 	wxButton*  Bin = new wxButton(window, 9091, "Binary", wxPoint(255, 0), wxSize(80, 50));

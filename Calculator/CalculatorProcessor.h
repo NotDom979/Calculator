@@ -10,10 +10,7 @@ class CalculatorProcessor
 private:
 	static CalculatorProcessor* instance;
 	CalculatorProcessor() {}
-	int num1 = 0;
-	int _dec = 0;
-	int num3 = 0;
-	int result = 0;
+
 	std::vector<int> nums;
 	bool add = false;
 	bool sub = false;
@@ -24,12 +21,17 @@ private:
 	bool hEX = false;
 	bool dEC = false;
 	bool neg = false;
+public:
 	enum Choice
 	{
 	 aDd, sUb, pRod, qUot, mOd, biN, heX, deC, clear
 	};
 	std::vector<Choice> choices;
-public:
+	bool equal = false;
+	int num1 = 0;
+	int _dec = 0;
+	int num3 = 0;
+	int result = 0;
 	CalculatorProcessor(CalculatorProcessor& other) = delete;
 	void operator=(CalculatorProcessor& other) = delete;
 	static CalculatorProcessor* getInstance();

@@ -29,7 +29,7 @@ void CalculatorProcessor::Add(wxTextCtrl* numbox)
 		nums.push_back(num2);
 		numbox->Clear();
 	}
-	else if (numbox->GetValue().Contains("="))
+	else if (numbox->GetValue().Contains("=") || equal == true)
 	{
 		if (nums.size() != 0)
 		{
@@ -60,7 +60,7 @@ void CalculatorProcessor::Sub(wxTextCtrl* numbox)
 		nums.push_back(num2);
 		numbox->Clear();
 	}
-	else if (numbox->GetValue().Contains("="))
+	else if (numbox->GetValue().Contains("=") || equal == true)
 	{
 		int diff = num1 - num3;
 		if (nums.size() != 0)
@@ -101,7 +101,7 @@ void CalculatorProcessor::Multiply(wxTextCtrl* numbox)
 		nums.push_back(num2);
 		numbox->Clear();
 	}
-	else if (numbox->GetValue().Contains("="))
+	else if (numbox->GetValue().Contains("=") || equal == true)
 	{
 		if (nums.size() != 0)
 		{
@@ -152,7 +152,7 @@ void CalculatorProcessor::Divide(wxTextCtrl* numbox)
 		nums.push_back(num2);
 		numbox->Clear();
 	}
-	else if (numbox->GetValue().Contains("="))
+	else if (numbox->GetValue().Contains("=") || equal == true)
 	{
 
 		if (nums.size() != 0)
@@ -221,7 +221,7 @@ void CalculatorProcessor::Mod(wxTextCtrl* numbox)
 		nums.push_back(num2);
 		numbox->Clear();
 	}
-	else if (numbox->GetValue().Contains("="))
+	else if (numbox->GetValue().Contains("=") || equal == true)
 	{
 		int num3 = GetNum(numbox);
 		if (nums.size() != 0)
@@ -314,6 +314,7 @@ int CalculatorProcessor::GetNum(wxTextCtrl* numbox)
 
 void CalculatorProcessor::Equals(wxTextCtrl* numbox)
 {
+	 equal = true;
 
 	for (int i = 0; i < choices.size(); i++)
 	{
