@@ -175,7 +175,10 @@ void CalculatorProcessor::Divide(wxTextCtrl* numbox)
 			if (result == 0)
 			{
 				result = num1 / num3;
-				quotient = d / v;
+				if (d != 0 && v != 0)
+				{
+					quotient = d / v;
+				}
 			}
 			else
 				result = result / num1 / num3;

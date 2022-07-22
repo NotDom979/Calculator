@@ -33,8 +33,8 @@ public:
 	int _dec = 0;
 	int x = 0;
 	int y = 0;
-	int d = 0;
-	int v = 0;
+	int d = num1;
+	int v = num3;
 	std::string b = "";
 	int diff = 0;
 	int produ = 0;
